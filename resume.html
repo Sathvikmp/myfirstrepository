@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .resume-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .name {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 0;
+        }
+
+        .section {
+            padding: 30px 40px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section:hover {
+            background: rgba(102, 126, 234, 0.02);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: left 0.3s ease;
+        }
+
+        .section:hover .section-title::after {
+            left: 0;
+        }
+
+        .summary-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        .education-item, .cert-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover, .cert-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .degree {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .institution {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                margin: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <h1 class="name">Sathvik M P</h1>
+            <p class="title">Data Science Enthusiast | Python Development | Analytical Skills | IBM Certified</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    sathvikmp.2004@gmail.com
+                </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                    </svg>
+                    LinkedIn
+                </div>
+                <div class="contact-item">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    Bengaluru
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="section">
+                <h2 class="section-title">SUMMARY</h2>
+                <p class="summary-text">
+                    Organized and dependable candidate successful at managing multiple priorities with a positive attitude. Willingness to take on added responsibilities to meet team goals. Data Scientist with strong analytical and problem-solving skills. Adept at leveraging data to drive actionable insights and support business goals. Skilled in Python, R, and SQL, with focus on machine learning and statistical analysis. Reliable team player, adaptable to changing needs, and consistently delivers results through collaboration and effective communication. Precocious Data Science Intern ready to accept increasingly complex challenges associated with maintaining and exploiting growing data stores. Driven to expand experience through hands-on training and guided participation in effective data management tasks. Ready to immediately contribute beneficial input to employers.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">EDUCATION</h2>
+                <div class="education-item">
+                    <div class="degree">B Tech, Computer Software Engineering</div>
+                    <div class="institution">Ms Ramaiah University of Applied Sciences</div>
+                    <div class="duration">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H18V1h-2v1H8V1H6v1H3.5C2.67 2 2 2.67 2 3.5v15C2 19.33 2.67 20 3.5 20h15c.83 0 1.5-.67 1.5-1.5v-15C20 2.67 19.33 2 18.5 2z"/>
+                        </svg>
+                        01/2022 - 01/2026
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">CERTIFICATIONS</h2>
+                <div class="cert-grid">
+                    <div class="cert-item">
+                        <div class="degree">Data Science Methodology</div>
+                        <div class="institution">IBM</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="degree">Python for Data Science, AI & Development</div>
+                        <div class="institution">IBM</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="degree">Python Project for Data Science</div>
+                        <div class="institution">IBM</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="degree">Tools for Data Science</div>
+                        <div class="institution">IBM</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="degree">Data Science Orientation</div>
+                        <div class="institution">Coursera</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="degree">What is Data Science?</div>
+                        <div class="institution">IBM</div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="degree">MyCaptain certified Data Analytics With Python</div>
+                        <div class="institution">MyCaptain</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">SKILLS</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Python Programming</div>
+                    <div class="skill-item">SQL</div>
+                    <div class="skill-item">Machine Learning</div>
+                    <div class="skill-item">Big Data Analytics</div>
+                    <div class="skill-item">Data Analysis</div>
+                    <div class="skill-item">Data Visualization and Presentations</div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
